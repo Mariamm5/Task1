@@ -17,8 +17,10 @@ if (isset($_POST['submit'])) {
 
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO `users`(`name`,`email`,`password`)
-        VALUES ('$name','$email','$hashPassword')";
-        mysqli_query($con, $sql); 
+        $stmt = $con->prepare("INSERT INTO users(name,email,password)VALUES (:name, :email,:password)");
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashPassword);
+        $stmt->execute();
     }
 }

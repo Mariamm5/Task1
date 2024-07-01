@@ -1,13 +1,10 @@
 <?php
 $servername = "localhost";
-$username = "root";  
+$username = "root";
 $password = "";
 $db = "for_tasks";
-$con = mysqli_connect($servername, $username, $password, $db);
 
-if ($con) {
-    echo "It's connected!<br>";
-} else {
-    echo "Not connected!";
-    die();
-}
+
+$con = new PDO("mysql:host=$servername;dbname=$db;", $username, $password);
+var_dump($con);
+$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
